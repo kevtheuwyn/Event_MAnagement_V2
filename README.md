@@ -1,4 +1,4 @@
-# Event_MAnagement_V2
+# Event_Management_V2
 
 To run the website in Flask, please make sure python is being installed
 Then follow the following steps: 
