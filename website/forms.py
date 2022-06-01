@@ -1,27 +1,53 @@
 
 from flask_wtf import FlaskForm
 from wtforms.fields import TextAreaField,SubmitField, StringField, PasswordField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms.validators import DataRequired, Length, Email, EqualTo, Length, Optional
 
 
 #creates the login information
+class SignupForm(FlaskForm):
+    """User Sign-up Form."""
+    name = StringField(
+        'Name',
+        validators=[DataRequired()]
+    )
+    email = StringField(
+        'Email',
+        validators=[
+            Length(min=6),
+            Email(message='Enter a valid email.'),
+            DataRequired()
+        ]
+    )
+    password = PasswordField(
+        'Password',
+        validators=[
+            DataRequired(),
+            Length(min=6, message='Select a stronger password.')
+        ]
+    )
+    confirm = PasswordField(
+        'Confirm Your Password',
+        validators=[
+            DataRequired(),
+            EqualTo('password', message='Passwords must match.')
+        ]
+    )
+    website = StringField(
+        'Website',
+        validators=[Optional()]
+    )
+    submit = SubmitField('Register')
+
+
 class LoginForm(FlaskForm):
-    user_name=StringField("User Name", validators=[InputRequired('Enter user name')])
-    password=PasswordField("Password", validators=[InputRequired('Enter user password')])
-    submit = SubmitField("Login")
-
- # this is the registration form
-class RegisterForm(FlaskForm):
-    user_name=StringField("User Name", validators=[InputRequired()])
-    email_id = StringField("Email Address", validators=[Email("Please enter a valid email")])
-    
-    #add buyer/seller - check if it is a buyer or seller hint : Use RequiredIf field
-
-
-    #linking two fields - password should be equal to data entered in confirm
-    password=PasswordField("Password", validators=[InputRequired(),
-                  EqualTo('confirm', message="Passwords should match")])
-    confirm = PasswordField("Confirm Password")
-
-    #submit button
-    submit = SubmitField("Register")
+    """User Log-in Form."""
+    email = StringField(
+        'Email',
+        validators=[
+            DataRequired(),
+            Email(message='Enter a valid email.')
+        ]
+    )
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Log In')
