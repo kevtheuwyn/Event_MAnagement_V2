@@ -30,13 +30,11 @@ def login():
             return redirect(next_page or url_for('main_bp.dashboard'))
         flash('Invalid username/password combination')
         return redirect(url_for('auth_bp.login'))
+        
     return render_template(
-        # login.jinja2
-        'home/index.html',
+        # 
+        'accounts/login.html',
         form=form,
-        title='Log in.',
-        template='login-page',
-        body="Log in with your User account."
     )
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
