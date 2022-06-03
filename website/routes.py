@@ -11,7 +11,7 @@ main_bp = Blueprint(
 
 
 @main_bp.route('/', methods=['GET'])
-@login_required
+# @login_required
 def dashboard():
     """Logged-in User Dashboard."""
     return render_template(
@@ -29,8 +29,8 @@ def logout():
     logout_user()
     return redirect(url_for('auth_bp.login'))
 
-@main_bp.route('/creation', methods=['GET'])
-@login_required
+@main_bp.route('/creation', methods=['GET','POST'])
+# @login_required
 def createEvent():
     """Logged-in User Dashboard."""
     return render_template(
@@ -41,8 +41,8 @@ def createEvent():
         body="You are now logged in!"
     )
 
-@main_bp.route('/history', methods=['GET'])
-@login_required
+@main_bp.route('/history', methods=['GET','POST'])
+# @login_required
 def history():
     """Logged-in User Dashboard."""
     return render_template(
@@ -53,8 +53,8 @@ def history():
         body="You are now logged in!"
     )
 
-@main_bp.route('/details', methods=['GET'])
-@login_required
+@main_bp.route('/details', methods=['GET','POST'])
+# @login_required
 def event_details():
     """Logged-in User Dashboard."""
     return render_template(
@@ -62,5 +62,4 @@ def event_details():
         title='Flask-Login Tutorial.',
         template='dashboard-template',
         current_user=current_user,
-        body="You are now logged in!"
     )

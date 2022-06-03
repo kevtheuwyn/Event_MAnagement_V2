@@ -32,8 +32,8 @@ def login():
         return redirect(url_for('auth_bp.login'))
         
     return render_template(
-        # 
-        'accounts/login.html',
+        # accounts/login.html
+        'home/index.html',
         form=form,
     )
 
